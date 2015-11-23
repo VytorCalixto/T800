@@ -61,8 +61,9 @@ int main(int argc, char const *argv[]) {
 
   for(int i=0; i < t_size; ++i) {
       // Pega o ângulo entre a posição do robô e o próximo ponto
-      double turnAngle = angleFromOrigin(tuplas[i].x, tuplas[i].y) - r.theta;
+      double angle = angleFromOrigin(tuplas[i].x, tuplas[i].y);
       // Gira o robô
+      r.theta = angle;
       // calcula a velocidade para as rodas
   }
   // gerar tabela e grafico
