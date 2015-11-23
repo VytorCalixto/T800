@@ -11,13 +11,11 @@ typedef struct{
     int x, y, t;
 } Tuple;
 
-int menorDistancia (xa,ya,xb,yb){
+double menorDistancia (int xa, int ya, int xb,int yb){
   return (sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
 }
 
 int main(int argc, char const *argv[]) {
-  /* code */
-  int dist;
   int t_size;
   Tuple *tuplas;
   puts("Quantos pontos há na lista? Mínimo de 10 elementos.");
@@ -36,12 +34,6 @@ int main(int argc, char const *argv[]) {
   for(int i=0; i < t_size; ++i) {
       scanf("%d %d %d", &tuplas[i].x, &tuplas[i].y, &tuplas[i].t);
   }
-
-
-  // Fiz uma função que calcula a menor distância entre pontos, não sei se é útil
-  // for (int i=0; i<10; ++i){
-  //   dist = menorDistancia(tuplas[i][0],tuplas[i][1],tuplas[i+1][0],tuplas[i+1][1]);
-  // }
 
   // calcular velocidade das rodas entre cada coordenada
   // gerar tabela e grafico
