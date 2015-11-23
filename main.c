@@ -1,9 +1,7 @@
 #include <stdio.h>
 
 #define L 0.15
-// L = Distancia centro da roda - eixo
-// Não tenho ideia desse valor
-// Ou da unidade (15 cm?)
+// L = Distancia centro da roda - eixo em cm
 
 int menorDistancia (xa,ya,xb,yb){
   return (sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
