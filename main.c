@@ -20,6 +20,24 @@ double menorDistancia (int xa, int ya, int xb,int yb){
   return (sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
 }
 
+// Retorna o ângulo em relação a origem (0,0)
+double angleFromOrigin(int x, int y) {
+    /**
+     * Y
+     * ^
+     * |--*
+     * | /|
+     * |/ |
+     * +----------> X
+     * |
+     * 1. Sabendo os valores de x e y, calculamos a hipotenusa
+     * 2. Com o valor de X e da Hip, temos o seno do ângulo formado entre a hipotenusa e o eixo X
+     * 3. Fazemos a função arco seno para pegar o valor do ângulo (em radianos)
+     */
+    double hip = x*x + y*y;
+    return asin(x/hip);
+}
+
 int main(int argc, char const *argv[]) {
   int t_size;
   Tuple *tuplas;
@@ -41,10 +59,10 @@ int main(int argc, char const *argv[]) {
       scanf("%d %d %d", &tuplas[i].x, &tuplas[i].y, &tuplas[i].t);
   }
 
-  // calcular velocidade das rodas entre cada coordenada
   for(int i=0; i < t_size; ++i) {
-      // pega o ângulo entre a posição do robô e o próximo ponto
-      // gira o robô
+      // Pega o ângulo entre a posição do robô e o próximo ponto
+      double turnAngle = angleFromOrigin(tuplas[i].x, tuplas[i].y) - r.theta;
+      // Gira o robô
       // calcula a velocidade para as rodas
   }
   // gerar tabela e grafico
