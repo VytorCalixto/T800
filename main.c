@@ -20,7 +20,7 @@ typedef struct {
 } Robot;
 
 double velocity(double dist, double tempo){
-  return (dist / tempo);
+  return (dist / (tempo/1000));
 }
 
 double distance(int xa, int ya, int xb,int yb){
@@ -43,6 +43,15 @@ double angleFromOrigin(int x, int y) {
      */
     double hip = sqrt(x*x + y*y);
     return acos(x/hip) * 180/PI;
+}
+
+void moverRobo(Robot *r, int x, int y){
+  /* Deveríamos "acionar os motores"
+  *  e realmente movimentar o robô
+  *	 Contudo estamos só simulando esse movimento
+  */
+  r->x = x;
+  r->y = y;
 }
 
 int main(int argc, char const *argv[]) {
@@ -83,6 +92,7 @@ int main(int argc, char const *argv[]) {
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
       fprintf(graph, "w %f\n", velocidade);
+      moverRobo(&r,tuplas[i].x,tuplas[i].y);
   }
 
   fclose(graph);
