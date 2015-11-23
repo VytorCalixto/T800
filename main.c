@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 
 #define L 0.15
 // L = Distancia centro da roda - eixo em cm
@@ -16,12 +18,17 @@ typedef struct {
     double theta;
 } Robot;
 
-double menorDistancia (int xa, int ya, int xb,int yb){
+double velocity(double dist, double tempo){
+  return (dist / tempo);
+}
+
+double distance(int xa, int ya, int xb,int yb){
   return (sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
 }
 
 int main(int argc, char const *argv[]) {
   int t_size;
+  double velocidade, distancia;
   Tuple *tuplas;
   Robot r = {0, 0, 0};
   puts("Quantos pontos há na lista? Mínimo de 10 elementos.");
@@ -46,6 +53,8 @@ int main(int argc, char const *argv[]) {
       // pega o ângulo entre a posição do robô e o próximo ponto
       // gira o robô
       // calcula a velocidade para as rodas
+      distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
+      velocidade = velocity(distancia, tuplas[i].t);
   }
   // gerar tabela e grafico
 
