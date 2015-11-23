@@ -82,16 +82,20 @@ int main(int argc, char const *argv[]) {
       scanf("%d %d %d", &tuplas[i].x, &tuplas[i].y, &tuplas[i].t);
   }
 
+  int frame = 0;
+
   for(int i=0; i < t_size; ++i) {
       // Pega o ângulo entre a posição do robô e o próximo ponto
+      frame += tuplas[i].t;
       double angle = angleFromOrigin(tuplas[i].x, tuplas[i].y);
-      fprintf(graph, "r %f\n", angle - r.theta);
+      //printf("DEBUG: %f %f\n", angle, r.theta);
+      fprintf(graph, "%d %d %d %f\n", tuplas[i].x, tuplas[i].y, frame, angle - r.theta);
       // Gira o robô
       r.theta = angle;
       // calcula a velocidade para as rodas
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
-      fprintf(graph, "w %f\n", velocidade);
+      fprintf(graph, "%f\n", velocidade);
       moverRobo(&r,tuplas[i].x,tuplas[i].y);
   }
 
