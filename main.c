@@ -45,6 +45,12 @@ double angleFromOrigin(int x, int y) {
     return acos(x/hip) * 180/PI;
 }
 
+double angleFromPoint(int ox, int oy, int x, int y) {
+    //ox e oy são os pontos da nova referência
+    double hip = distance(o)nx, oy, x, y);
+    return acos((ox-x)/hip) * 180/PI;
+}
+
 void moverRobo(Robot *r, int x, int y){
   /* Deveríamos "acionar os motores"
   *  e realmente movimentar o robô
@@ -87,11 +93,12 @@ int main(int argc, char const *argv[]) {
   for(int i=0; i < t_size; ++i) {
       // Pega o ângulo entre a posição do robô e o próximo ponto
       frame += tuplas[i].t;
-      double angle = angleFromOrigin(tuplas[i].x, tuplas[i].y);
+      double angle = angleFromPoint(r.x, r.y, tuplas[i].x, tuplas[i].y);
+      double turn = angle - r.theta; // angulo para girar o robo
       //printf("DEBUG: %f %f\n", angle, r.theta);
       fprintf(graph, "%d %d %d %f\n", tuplas[i].x, tuplas[i].y, frame, angle - r.theta);
       // Gira o robô
-      r.theta = angle;
+      r.theta += turn;
       // calcula a velocidade para as rodas
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
