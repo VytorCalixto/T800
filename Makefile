@@ -1,4 +1,4 @@
-CFLAGS = -std=c99 -Wall
+CFLAGS = -std=c99 -Wall -lm
 
 all: main.c
 	gcc -o robot main.c $(CFLAGS)

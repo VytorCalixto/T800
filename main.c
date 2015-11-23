@@ -21,9 +21,9 @@ int main(int argc, char const *argv[]) {
   int t_size;
   Tuple *tuplas;
   puts("Quantos pontos há na lista? Mínimo de 10 elementos.");
-  scanf("%d\n", &t_size);
+  scanf("%d", &t_size);
   if(t_size < 10) {
-      puts("A lista deve ter no mínimo 10 elementos.")
+      puts("A lista deve ter no mínimo 10 elementos.");
       exit(1);
   }
   tuplas = malloc(t_size*sizeof(Tuple));
@@ -34,13 +34,14 @@ int main(int argc, char const *argv[]) {
   puts("Por favor insira as coordenadas na qual o robô deverá passar e seu tempo em milissegundos.");
   puts("(Ex: x1 y1 tempo1\n   x2 y2 tempo2\n ...\n xN yN tempoN)");
   for(int i=0; i < t_size; ++i) {
-      scanf("%d %d %d\n", &tuplas[i].x, &tuplas[i].y, &tuplas[i].t);
+      scanf("%d %d %d", &tuplas[i].x, &tuplas[i].y, &tuplas[i].t);
   }
 
+
   // Fiz uma função que calcula a menor distância entre pontos, não sei se é útil
-  for (int i=0; i<10; ++i){
-    dist = menorDistancia(tuplas[i][0],tuplas[i][1],tuplas[i+1][0],tuplas[i+1][1]);
-  }
+  // for (int i=0; i<10; ++i){
+  //   dist = menorDistancia(tuplas[i][0],tuplas[i][1],tuplas[i+1][0],tuplas[i+1][1]);
+  // }
 
   // calcular velocidade das rodas entre cada coordenada
   // gerar tabela e grafico
