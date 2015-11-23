@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+#define PI 3.14159265
 #define L 0.15
 // L = Distancia centro da roda - eixo em cm
 
@@ -38,10 +39,10 @@ double angleFromOrigin(int x, int y) {
      * |
      * 1. Sabendo os valores de x e y, calculamos a hipotenusa
      * 2. Com o valor de X e da Hip, temos o seno do ângulo formado entre a hipotenusa e o eixo X
-     * 3. Fazemos a função arco seno para pegar o valor do ângulo (em radianos)
+     * 3. Fazemos a função arco cosseno para pegar o valor do ângulo (em graus)
      */
-    double hip = x*x + y*y;
-    return asin(x/hip);
+    double hip = sqrt(x*x + y*y);
+    return acos(x/hip) * 180/PI;
 }
 
 int main(int argc, char const *argv[]) {
@@ -49,6 +50,12 @@ int main(int argc, char const *argv[]) {
   double velocidade, distancia;
   Tuple *tuplas;
   Robot r = {0, 0, 0};
+  FILE *graph = fopen("./graph", "w");
+  FILE *out = fopen("./table", "w");
+  if(graph == NULL || out == NULL) {
+      puts("Erro ao criar arquivos de saída.");
+      exit(1);
+  }
   puts("Quantos pontos há na lista? Mínimo de 10 elementos.");
   scanf("%d", &t_size);
   if(t_size < 10) {
@@ -69,13 +76,17 @@ int main(int argc, char const *argv[]) {
   for(int i=0; i < t_size; ++i) {
       // Pega o ângulo entre a posição do robô e o próximo ponto
       double angle = angleFromOrigin(tuplas[i].x, tuplas[i].y);
+      fprintf(graph, "r %f\n", angle - r.theta);
       // Gira o robô
       r.theta = angle;
       // calcula a velocidade para as rodas
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
+      fprintf(graph, "w %f\n", velocidade);
   }
-  // gerar tabela e grafico
+
+  fclose(graph);
+  fclose(out);
 
   return 0;
 }
