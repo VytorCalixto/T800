@@ -14,6 +14,6 @@ set grid
 
 set style data linespoints
 
-splot "velo" using 1:2 title "Velocidade", \
+plot "velo" using 1:2 title "Velocidade", \
 	"dir" using 1:2 title "Direcao"
 
