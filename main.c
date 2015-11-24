@@ -41,11 +41,17 @@ double angleFromOrigin(int x, int y) {
      * 2. Com o valor de X e da Hip, temos o seno do ângulo formado entre a hipotenusa e o eixo X
      * 3. Fazemos a função arco cosseno para pegar o valor do ângulo (em graus)
      */
-    double hip = sqrt(x*x + y*y);
-    return acos(x/hip) * 180/PI;
+    if(x && y) {
+        double hip = sqrt(x*x + y*y);
+        return acos(x/hip) * 180/PI;
+    }
+    return 0;
 }
 
 double angleFromPoint(int ox, int oy, int x, int y) {
+    if(ox == x && oy == y) {
+        return 0;
+    }
     //ox e oy são os pontos da nova referência
     double hip = distance(ox, oy, x, y);
     return acos((ox-x)/hip) * 180/PI;
