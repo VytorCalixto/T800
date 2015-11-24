@@ -72,6 +72,7 @@ int main(int argc, char const *argv[]) {
   Tuple *tuplas;
   Robot r = {0, 0, 0};
   FILE *graph = fopen("./graph", "w");
+  fprintf(graph, "0 0 0\n");
   FILE *velo = fopen("./velo", "w");
   FILE *dir = fopen("./dir", "w");
   if(graph == NULL || velo == NULL || dir == NULL) {
@@ -103,7 +104,7 @@ int main(int argc, char const *argv[]) {
       double angle = angleFromPoint(r.x, r.y, tuplas[i].x, tuplas[i].y);
       double turn = angle - r.theta; // angulo para girar o robo
       //printf("DEBUG: %f %f\n", angle, r.theta);
-      fprintf(graph, "%d %d %d\n", tuplas[i].x, tuplas[i].y, frame);
+      fprintf(graph, "%d %d\n", tuplas[i].x, tuplas[i].y);
       // Gira o robô
       r.theta += turn;
       // calcula a velocidade para as rodas
