@@ -110,8 +110,8 @@ int main(int argc, char const *argv[]) {
       // calcula a velocidade para as rodas
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
-      fprintf(velo, "%f %d\n", velocidade, frame);
-      fprintf(dir, "%f %d\n", r.theta, frame);
+      fprintf(velo, "%d %f\n", frame, velocidade);
+      fprintf(dir, "%d %f\n", frame, r.theta);
       moverRobo(&r,tuplas[i].x,tuplas[i].y);
   }
 
