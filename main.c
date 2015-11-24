@@ -66,8 +66,9 @@ int main(int argc, char const *argv[]) {
   Tuple *tuplas;
   Robot r = {0, 0, 0};
   FILE *graph = fopen("./graph", "w");
-  FILE *out = fopen("./table", "w");
-  if(graph == NULL || out == NULL) {
+  FILE *velo = fopen("./velo", "w");
+  FILE *dir = fopen("./dir", "w");
+  if(graph == NULL || velo == NULL || dir == NULL) {
       puts("Erro ao criar arquivos de saída.");
       exit(1);
   }
@@ -102,12 +103,14 @@ int main(int argc, char const *argv[]) {
       // calcula a velocidade para as rodas
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
-      fprintf(out, "%f %f %d\n", velocidade, r.theta, frame);
+      fprintf(velo, "%f %d\n", velocidade, frame);
+      fprintf(dir, "%f %d\n", r.theta, frame);
       moverRobo(&r,tuplas[i].x,tuplas[i].y);
   }
 
   fclose(graph);
-  fclose(out);
+  fclose(velo);
+  fclose(dir);
 
   return 0;
 }
