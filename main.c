@@ -47,7 +47,7 @@ double angleFromOrigin(int x, int y) {
 
 double angleFromPoint(int ox, int oy, int x, int y) {
     //ox e oy são os pontos da nova referência
-    double hip = distance(o)nx, oy, x, y);
+    double hip = distance(ox, oy, x, y);
     return acos((ox-x)/hip) * 180/PI;
 }
 
@@ -96,13 +96,13 @@ int main(int argc, char const *argv[]) {
       double angle = angleFromPoint(r.x, r.y, tuplas[i].x, tuplas[i].y);
       double turn = angle - r.theta; // angulo para girar o robo
       //printf("DEBUG: %f %f\n", angle, r.theta);
-      fprintf(graph, "%d %d %d %f\n", tuplas[i].x, tuplas[i].y, frame, angle - r.theta);
+      fprintf(graph, "%d %d %d\n", tuplas[i].x, tuplas[i].y, frame);
       // Gira o robô
       r.theta += turn;
       // calcula a velocidade para as rodas
       distancia = distance(r.x, r.y, tuplas[i].x, tuplas[i].y);
       velocidade = velocity(distancia, tuplas[i].t);
-      fprintf(graph, "%f\n", velocidade);
+      fprintf(out, "%f %f %d\n", velocidade, r.theta, frame);
       moverRobo(&r,tuplas[i].x,tuplas[i].y);
   }
 
